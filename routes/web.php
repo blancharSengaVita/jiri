@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\SearchInputController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
+Route::view('/', [HomepageController::class, 'index']);
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
