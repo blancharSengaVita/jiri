@@ -16,7 +16,6 @@ class SearchInput extends Component
     public string $search;
     public Collection $contactsToAddToJiri;
     public string $id;
-    public Boolean $isChecked;
 
     public function mount()
     {
@@ -41,20 +40,17 @@ class SearchInput extends Component
 
     public function addContactToContactsToAddToJiri(Contact $contact)
     {
-        // Je veux verifier que chaque élément de la liste sois unique
-        // On ne peut pas ajouter 2 fois un contact avec le même id.
-        //Je sens que le problème est plus deep que ça mais, c'est un bandage que je mets là.
-        //Il faudrait utiliser un debugger
 
-//        if (!$this->contactsToAddToJiri->contains($contact)) {
-//            $this->contactsToAddToJiri->add($contact);
-//        }
+//        $this->contactsToAddToJiri->push($contact);
 //
-//        if ($this->contactsToAddToJiri->contains($contact)) {
-//
-//        }
+//        info($this->contactsToAddToJiri->count());
 
-        $this->contactsToAddToJiri->add($contact);
+        if (!$this->contactsToAddToJiri->contains($contact)){
+            $this->contactsToAddToJiri->put($contact->id,$contact);
+        } else {
+            $reducedContacts = $this->contactsToAddToJiri->filter(fn($c) => $contact->isNot($c));
+            $this->contactsToAddToJiri = $reducedContacts;
+        }
     }
 
 
