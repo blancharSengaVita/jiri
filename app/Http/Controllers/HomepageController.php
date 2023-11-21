@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class HomepageController extends Controller
 {
     public function index(){
-        return view('pages.auth.login');
+      return redirect('/login');
     }
 }
