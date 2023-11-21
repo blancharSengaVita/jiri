@@ -2,20 +2,23 @@
 
 namespace Database\Factories;
 
-use App\Models\Contact;
+use App\Models\Implementation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
-class ContactFactory extends Factory
+class ImplementationFactory extends Factory
 {
-    protected $model = Contact::class;
+    protected $model = Implementation::class;
 
     public function definition(): array
     {
+        $urls = [];
+        for ($i = 1; $i <= 3; $i++) {
+            $urls[] = $this->faker->url();
+        }
+
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'phone' => $this->faker->phoneNumber(),
+            'urls' => $urls,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];
